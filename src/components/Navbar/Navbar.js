@@ -55,7 +55,7 @@ const Navbar = () => {
               // taking only first 8 categories
               categories.slice(0, 8).map((category, idx) => (
                 <li className='nav-item no-wrap' key = {idx}>
-                  <Link to = {`category/${category}`} className='nav-link text-capitalize'>{category.replace("-", " ")}</Link>
+                    <Link to={`category/${category.slug}`} className='nav-link text-capitalize'>{category.name}</Link>
                 </li>
               ))
             }
