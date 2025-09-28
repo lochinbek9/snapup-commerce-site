@@ -51,22 +51,21 @@ const Navbar = () => {
             </div>
           </div>
 
-          <ul className='navbar-nav flex align-center fs-12 fw-4 font-manrope'>
-            {
-{Array.isArray(categories) && categories.length > 0 && (
-  categories.slice(0, 8).map((category, idx) => (
-    category && category.slug && category.name && (
-      <li className='nav-item no-wrap' key={idx}>
-        <Link to={`/category/${category.slug}`} className='nav-link text-capitalize'>
-          {category.name}
-        </Link>
-      </li>
-    )
-  ))
-)}
+<ul className='navbar-nav flex align-center fs-12 fw-4 font-manrope'>
+  {
+    Array.isArray(categories) && categories.length > 0 &&
+    categories.slice(0, 8).map((category, idx) => (
+      category && category.slug && category.name && (
+        <li className='nav-item no-wrap' key={idx}>
+          <Link to={`/category/${category.slug}`} className='nav-link text-capitalize'>
+            {category.name}
+          </Link>
+        </li>
+      )
+    ))
+  }
+</ul>
 
-            }
-          </ul>
         </div>
 
         <div className='navbar-cart flex align-center'>
