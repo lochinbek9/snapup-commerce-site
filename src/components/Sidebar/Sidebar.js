@@ -14,10 +14,8 @@ const Sidebar = () => {
     dispatch(fetchAsyncCategories());
   }, [dispatch]);
 
-  console.log("Sidebar categories:", categories); 
-
   return (
-    <aside className={`sidebar ${isSidebarOn ? 'hide-sidebar' : ""}`}>
+    <aside className={`sidebar ${isSidebarOn ? 'hide-sidebar' : ''}`}>
       <button
         type="button"
         className='sidebar-hide-btn'
@@ -35,7 +33,7 @@ const Sidebar = () => {
             categories.map((category, idx) => (
               category && category.slug && category.name && (
                 <li key={idx} onClick={() => dispatch(setSidebarOff())}>
-                  <Link to={`category/${category.slug}`} className='cat-list-link text-capitalize'>
+                  <Link to={`/category/${category.slug}`} className='cat-list-link text-capitalize'>
                     {category.name}
                   </Link>
                 </li>
