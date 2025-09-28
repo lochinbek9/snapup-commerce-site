@@ -1,37 +1,42 @@
-import React, {useEffect} from 'react';
-import "./CategoryProductPage.scss";
-import ProductList from "../../components/ProductList/ProductList";
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAllProductsByCategory, fetchAsyncProductsOfCategory, getCategoryProductsStatus } from '../../store/categorySlice';
-import Loader from '../../components/Loader/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAsyncProductsOfCategory, getAllProductsByCategory, getCategoryProductsStatus } from '../../store/categorySlice';
 import { STATUS } from '../../utils/status';
 
-const CategoryProductPage = () => {
+const CategoryProduct = () => {
+  const { category } = useParams(); 
   const dispatch = useDispatch();
-  const { category } = useParams();
-  const categoryProducts = useSelector(getAllProductsByCategory);
-  const categoryProductsStatus = useSelector(getCategoryProductsStatus);
+
+  const products = useSelector(getAllProductsByCategory);
+  const status = useSelector(getCategoryProductsStatus);
 
   useEffect(() => {
-    dispatch(fetchAsyncProductsOfCategory(category));
+    if (category) {
+      dispatch(fetchAsyncProductsOfCategory(category));
+    }
   }, [dispatch, category]);
 
   return (
-    <div className='cat-products py-5 bg-whitesmoke'>
-      <div className='container'>
-        <div className='cat-products-content'>
-          <div className='title-md'>
-            <h3>See our <span className='text-capitalize'>{category.replace("-", " ")}</span></h3>
-          </div>
+    <div className="category-products container py-5">
+      <h2 className='text-capitalize mb-4'>Products in "{category}"</h2>
 
-          {
-            categoryProductsStatus === STATUS.LOADING ? <Loader /> : <ProductList products = {categoryProducts} />
-          }
-        </div>
+      {status === STATUS.LOADING && <p>Loading products...</p>}
+      {status === STATUS.FAILED && <p>Failed to load products.</p>}
+      {status === STATUS.SUCCEEDED && products.length === 0 && <p>No products found in this category.</p>}
+
+      <div className='product-list grid'>
+        {
+          products.map(product => (
+            <div key={product.id} className='product-card'>
+              <h4>{product.title}</h4>
+              <p>${product.price}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryProductPage
+export default CategoryProduct;
