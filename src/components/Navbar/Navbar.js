@@ -24,6 +24,7 @@ const Navbar = () => {
   }, [carts])
 
   return (
+    console.log(categories);
     <nav className='navbar'>
       <div className='navbar-cnt flex align-center'>
         <div className='brand-and-toggler flex align-center'>
