@@ -10,6 +10,7 @@ import CartModal from "../CartModal/CartModal";
 const Navbar = () => {
   const dispatch = useDispatch();
   const categories = useSelector(getAllCategories);
+  console.log(categories);
   const carts = useSelector(getAllCarts);
   const itemsCount = useSelector(getCartItemsCount);
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,7 +25,6 @@ const Navbar = () => {
   }, [carts])
 
   return (
-    console.log(categories);
     <nav className='navbar'>
       <div className='navbar-cnt flex align-center'>
         <div className='brand-and-toggler flex align-center'>
